@@ -1,0 +1,31 @@
+﻿@model Produto[] 
+@{ 
+    ViewData["Title"] = "Home"; 
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Bem vindo</h1>
+    <p class="lead">Escolha sua próxima viagem</p>
+</div>
+
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        @foreach (var produto in Model) {
+            <form method="post">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">@Html.DisplayFor(x => produto.Nome)</h4>
+                    </div>
+                    <div class="card-body">
+                        <input type="hidden" name="idProdutoViajar" value="@produto.Id" />
+                        <h1 class="card-title pricing-card-title">R$ @Html.DisplayFor(x => produto.Preco)</h1>
+                        <button type="submit" asp-controller="Home" asp-action="Viajar" class="btn btn-lg btn-block btn-outline-primary">Viajar</button>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+

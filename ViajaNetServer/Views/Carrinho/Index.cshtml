@@ -1,0 +1,46 @@
+﻿@model Order 
+@{ 
+    ViewData["Title"] = "Carrinho"; 
+}
+
+<div class="text-center">
+    <h1 class="display-4">Checkout</h1>
+</div>
+
+<form method="post">
+    <div class="container">
+        @if (Model != null)
+        {
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Viagem</th>
+                    <th scope="col">Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in Model.Produtos) {
+                <tr>
+                    <td scope="row">@produto.Id</td>
+                    <td>@produto.Nome</td>
+                    <td>R$ 
+                        @if(produto.PrecoPromocao > 0) {
+                            @Html.DisplayFor(x => @produto.PrecoPromocao)
+                        } else {
+                            @Html.DisplayFor(x => @produto.Preco)
+                        }
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <h4 class="display-6">Total: R$ @Html.DisplayFor(x => Model.Total)</h4>
+        }
+    </div>
+
+    
+
+    <button type="submit" asp-controller="Confirmacao" asp-action="Index" class="btn btn-lg btn-block btn-outline-primary">Confirmar</button>
+</form>
